@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "739232944753",
+    "firebase_url": "https://flash-chat-a5f17.firebaseio.com",
+    "project_id": "flash-chat-a5f17",
+    "storage_bucket": "flash-chat-a5f17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739232944753:android:72f331fb37653d6ea381d0",
+        "android_client_info": {
+          "package_name": "co.tanishq.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739232944753-0qg2te6mdc5cb0u7e7gcplas4ue0v3cr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAouPjFSoWjRPoFyK14fxx1gVDuKBbfdP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739232944753-0qg2te6mdc5cb0u7e7gcplas4ue0v3cr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
