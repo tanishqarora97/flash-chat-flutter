@@ -1,4 +1,3 @@
-import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,20 +10,19 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final _firestore = FirebaseFirestore.instance;
+  final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
   String messageText;
-  User loggedInUser;
+  FirebaseUser loggedInUser;
   @override
   void initState() {
     super.initState();
     getCurrentUser();
   }
 
-  void getCurrentUser() {
+  void getCurrentUser() async {
     try {
-      // ignore: await_only_futures
-      final User user = _auth.currentUser;
+      final user = await _auth.currentUser();
       if (user != null) {
         loggedInUser = user;
         print(loggedInUser.email);
@@ -34,17 +32,10 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-  // void getMessages() async {
-  //   final messages = await _firestore.collection('messages').get();
-  //   for (var message in messages.docs) {
-  //     print(message.data());
-  //   }
-  // }
-
   void messageStream() async {
     await for (var snapshot in _firestore.collection('messages').snapshots()) {
-      for (var message in snapshot.docs) {
-        print(message.data());
+      for (var message in snapshot.documents) {
+        print(message.data);
       }
     }
   }
@@ -71,6 +62,19 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream: _firestore.collection('messages').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final messages = snapshot.data.documents;
+                  List<Text> messageWidgets = [];
+                  for (var message in messages) {
+                    final messageText = message.data['text'];
+                    final messageSender = message.data['sender'];
+                  }
+                }
+              },
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
